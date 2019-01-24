@@ -1,17 +1,18 @@
 """
 Hangman.
 
-Authors: PUT_YOUR_NAME_HERE and YOUR_PARTNERS_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+Authors: Nick Snow and Katana Colledge.
+"""  # Done: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
-# TODO: 2. Implement Hangman using your Iterative Enhancement Plan.
+# Done: 2. Implement Hangman using your Iterative Enhancement Plan.
 
 ####### Do NOT attempt this assignment before class! #######
 def main():
         #Global Variables:
-
-
         chosenword = random_word_generator()
+        win_check=[]
+        for k in range(len(chosenword)):
+            win_check.append(chosenword[k])
         difficulty = difficulty_options()
         wrong = 0
         display = []
@@ -31,6 +32,7 @@ def main():
             #LOSE CONDITION
             if wrong == difficulty:
                 print("You have lost the game!")
+                print("The word was:",chosenword)
                 playagain=end_game()
                 if playagain == 'Y':
                     main()
@@ -38,12 +40,7 @@ def main():
                     break
 
             #WIN CONDITION
-            for i in range(len(display)):
-                value = True
-                if display[i]=='_':
-                    value == False
-
-            if value == True:
+            if win_check == display:
                 print('You Win!')
                 playagain=end_game()
                 if playagain=='Y':
@@ -56,7 +53,7 @@ def main():
 
     #FUNCTION DEFINITIONS:
 def difficulty_options():
-    difficulty=int(input('Choose The Number of Incorrect Attempts: '))
+    difficulty=int(input('Choose The Number of Possible Incorrect Attempts: '))
     return difficulty
 
 def random_word_generator():
@@ -67,7 +64,6 @@ def random_word_generator():
         words=string.split()
     randomindex = random.randint(0,len(words)-1)
     chosenword=words[randomindex]
-    print(chosenword)
     return chosenword
 
 def display_word(chosenword,foundletters,letter,display):
@@ -121,27 +117,6 @@ def checkletter(letter,chosenword,foundletters):
     if yes==1:
         return True
     return False
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #Calling of Main
 main()
